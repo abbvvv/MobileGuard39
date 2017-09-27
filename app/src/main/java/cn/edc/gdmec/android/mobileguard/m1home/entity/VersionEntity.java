@@ -6,8 +6,9 @@ package cn.edc.gdmec.android.mobileguard.m1home.entity;
 
 public class VersionEntity {
 
-    private String versionCode;
-    private String description;
-    private String apkurl;
+    public String versionCode;
+    public String description;
+    public String apkurl;
+
 
 }
