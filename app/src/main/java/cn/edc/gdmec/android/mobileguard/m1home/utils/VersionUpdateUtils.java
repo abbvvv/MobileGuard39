@@ -6,24 +6,19 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Message;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.annotation.Experimental;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
 import cn.edc.gdmec.android.mobileguard.R;
 import cn.edc.gdmec.android.mobileguard.m1home.HomeActivity;
@@ -138,6 +133,6 @@ public class VersionUpdateUtils {
     }
     private void downloadNewApk(String apkurl){
         DownloadUtils downloadUtils=new DownloadUtils();
-        downloadUtils.downapk(apkurl,"/mnt/sdcard/mobilesafe2.0.spk",context);
+        downloadUtils.downapk(apkurl,"/mnt/sdcard/mobilesafe2.0.apk",context);
     }
 }
