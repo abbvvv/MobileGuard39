@@ -32,10 +32,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".m2theftguard.LostFindActivity" />
-        <activity android:name=".m2theftguard.Setup1Activity" />
-        <activity android:name=".m2theftguard.Setup2Activity" />
-        <activity android:name=".m2theftguard.Setup3Activity" />
-        <activity android:name=".m2theftguard.Setup4Activity" />
+        <activity android:name=".m2theftguard.SetUp1Activity" />
+        <activity android:name=".m2theftguard.SetUp2Activity" />
+        <activity android:name=".m2theftguard.SetUp3Activity" />
+        <activity android:name=".m2theftguard.SetUp4Activity" />
 
         <receiver
             android:name=".m2theftguard.receiver.BootCompleteReceiver"

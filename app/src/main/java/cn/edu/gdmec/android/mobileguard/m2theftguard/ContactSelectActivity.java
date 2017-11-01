@@ -2,6 +2,7 @@ package cn.edu.gdmec.android.mobileguard.m2theftguard;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
-import java.util.logging.Handler;
+
 
 import cn.edu.gdmec.android.mobileguard.R;
 import cn.edu.gdmec.android.mobileguard.m2theftguard.adapter.ContactAdapter;
@@ -28,7 +29,7 @@ public class ContactSelectActivity extends AppCompatActivity implements View.OnC
     private ListView mListView;
     private ContactAdapter adapter;
     private List<ContactInfo> systemContacts;
-    android.os.Handler mHandler=new android.os.Handler() {
+    Handler mHandler=new Handler(){
         public void handleMessage(android.os.Message msg){
             switch (msg.what){
                 case 10:

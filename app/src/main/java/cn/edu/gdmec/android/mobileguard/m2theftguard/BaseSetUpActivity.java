@@ -17,7 +17,7 @@ import cn.edu.gdmec.android.mobileguard.R;
  * Created by Administrator on 2017/10/15.
  */
 
-public abstract class BaseSetupActivity extends AppCompatActivity{
+public abstract class BaseSetUpActivity extends AppCompatActivity{
     public SharedPreferences sp;
     private GestureDetector mGestureDetector;
     public abstract void showNext();

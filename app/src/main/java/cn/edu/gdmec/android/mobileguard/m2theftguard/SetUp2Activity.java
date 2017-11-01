@@ -15,7 +15,7 @@ import cn.edu.gdmec.android.mobileguard.R;
  * Created by Administrator on 2017/10/15.
  */
 
-public class Setup2Activity extends BaseSetupActivity implements View.OnClickListener{
+public class SetUp2Activity extends BaseSetUpActivity implements View.OnClickListener{
     private TelephonyManager mTelephonyManager;
     private Button mBindSIMBtn;
     @Override
@@ -33,7 +33,7 @@ public class Setup2Activity extends BaseSetupActivity implements View.OnClickLis
         }
     }
     private boolean isBind(){
-            String simString=sp.getString("sim",null);
+        String simString=sp.getString("sim",null);
         if(TextUtils.isEmpty(simString)){
             return false;
         }
@@ -46,13 +46,13 @@ public class Setup2Activity extends BaseSetupActivity implements View.OnClickLis
             Toast.makeText(this,"您还没有绑定SIM卡！",Toast.LENGTH_LONG).show();
             return;
         }
-        startActivityAndFinishSelf(Setup3Activity.class);
+        startActivityAndFinishSelf(SetUp3Activity.class);
 
     }
 
     @Override
     public void showPre() {
-        startActivityAndFinishSelf(Setup1Activity.class);
+        startActivityAndFinishSelf(SetUp1Activity.class);
 
     }
 

@@ -15,7 +15,7 @@ import cn.edu.gdmec.android.mobileguard.R;
  * Created by Administrator on 2017/10/15.
  */
 
-public class Setup3Activity extends BaseSetupActivity implements View.OnClickListener{
+public class SetUp3Activity extends BaseSetUpActivity implements View.OnClickListener{
     private EditText mInputPhone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +41,14 @@ public class Setup3Activity extends BaseSetupActivity implements View.OnClickLis
         SharedPreferences.Editor edit=sp.edit();
         edit.putString("safephone",safePhone);
         edit.commit();
-        startActivityAndFinishSelf(Setup4Activity.class);
+        startActivityAndFinishSelf(SetUp4Activity.class);
 
     }
 
     @Override
     public void showPre() {
 
-        startActivityAndFinishSelf(Setup2Activity.class);
+        startActivityAndFinishSelf(SetUp2Activity.class);
     }
 
 

@@ -13,7 +13,7 @@ import cn.edu.gdmec.android.mobileguard.R;
  * Created by Administrator on 2017/10/15.
  */
 
-public class Setup4Activity extends BaseSetupActivity{
+public class SetUp4Activity extends BaseSetUpActivity {
     private TextView mStatusTV;
     private ToggleButton mToggleButton;
     @Override
@@ -63,6 +63,6 @@ public class Setup4Activity extends BaseSetupActivity{
     @Override
     public void showPre() {
 
-        startActivityAndFinishSelf(Setup3Activity.class);
+        startActivityAndFinishSelf(SetUp3Activity.class);
     }
 }

@@ -10,7 +10,7 @@ import cn.edu.gdmec.android.mobileguard.R;
  * Created by Administrator on 2017/10/15.
  */
 
-public class Setup1Activity extends BaseSetupActivity{
+public class SetUp1Activity extends BaseSetUpActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,7 +20,7 @@ public class Setup1Activity extends BaseSetupActivity{
 
     @Override
     public void showNext() {
-        startActivityAndFinishSelf(Setup2Activity.class);
+        startActivityAndFinishSelf(SetUp2Activity.class);
 
     }
 
