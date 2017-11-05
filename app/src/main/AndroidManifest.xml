@@ -75,9 +75,10 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".m3communicationguard.AddBlackNumberActivity" />
+        <activity android:name=".m3communicationguard.AddBlackNumberActivity"/>
         <activity android:name=".m3communicationguard.SecurityPhoneActivity"/>
-        <receiver android:name=".m3communicationguard.receiver.InterceptCallReciever"
+        <receiver
+            android:name=".m3communicationguard.receiver.InterceptCallReciever"
             android:exported="true"
             android:enabled="true">
             <intent-filter android:priority="2147483647">
@@ -85,7 +86,8 @@
                 <action android:name="android.intent.action.NEW_OUTGOING_CALL"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".m3communicationguard.receiver.InterceptSmsReciever"
+        <receiver
+            android:name=".m3communicationguard.receiver.InterceptSmsReciever"
             android:enabled="true"
             android:exported="true">
             <intent-filter android:priority="2147483647">
