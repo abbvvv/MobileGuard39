@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.Window;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import cn.edu.gdmec.android.mobileguard.R;
@@ -34,6 +35,7 @@ public abstract class BaseSetUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         sp = getSharedPreferences("config",MODE_PRIVATE);
+
         mGestureDetector = new GestureDetector(this,new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onFling(MotionEvent e1,MotionEvent e2, float velocityX, float velocityY){
