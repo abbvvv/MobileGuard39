@@ -93,6 +93,7 @@ public class AppManagerAdapter extends BaseAdapter{
             viewHolder.mShareAppTV=(TextView)view.findViewById(R.id.tv_share_app);
             viewHolder.mUninstallTV=(TextView)view.findViewById(R.id.tv_uninstall_app);
             viewHolder.mAppOptionLL=(LinearLayout)view.findViewById(R.id.ll_option_app);
+            viewHolder.mAboutBTN = (TextView) view.findViewById(R.id.tv_aboutapp);
             view.setTag(viewHolder);
         }
         if(appInfo!=null){
@@ -111,6 +112,7 @@ public class AppManagerAdapter extends BaseAdapter{
         viewHolder.mSettingAppTV.setOnClickListener(listener);
         viewHolder.mShareAppTV.setOnClickListener(listener);
         viewHolder.mUninstallTV.setOnClickListener(listener);
+        viewHolder.mAboutBTN.setOnClickListener(listener);
         return view;
     }
 
@@ -134,6 +136,7 @@ public class AppManagerAdapter extends BaseAdapter{
         TextView mAppSizeTV;
         TextView mAppNameTV;
         LinearLayout mAppOptionLL;
+        TextView mAboutBTN;
     }
     class MyClickListener implements View.OnClickListener{
         private AppInfo appInfo;
@@ -161,6 +164,8 @@ public class AppManagerAdapter extends BaseAdapter{
                     }
                     EngineUtils.uninstallApplication(context,appInfo);
                     break;
+                case R.id.tv_aboutapp:
+                    EngineUtils.AboutSign(context,appInfo);
 
             }
         }

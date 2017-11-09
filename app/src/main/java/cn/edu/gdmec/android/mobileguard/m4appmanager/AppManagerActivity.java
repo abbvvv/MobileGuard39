@@ -35,6 +35,7 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
     private List<AppInfo> systemAppInfos=new ArrayList<AppInfo>();
     private AppManagerAdapter adapter;
     private TextView mAppNumTV;
+    private TextView mAboutBTN;
     private UninstallRececiver receciver;
     private Handler mHandler=new Handler(){
         @Override
@@ -101,7 +102,9 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
         mPhoneMemoryTV=(TextView)findViewById((R.id.tv_phonememory_appmanager));
         mSDMemoryTV=(TextView)findViewById((R.id.tv_sdmemory_appmanager));
         mAppNumTV=(TextView)findViewById((R.id.tv_appnumber));
+        mAboutBTN = (TextView) findViewById(R.id.tv_aboutapp);
         mListView=(ListView) findViewById((R.id.lv_appmanager));
+
         getMemoryFromPhone();
         initData();
         initListener();
@@ -174,5 +177,6 @@ public class AppManagerActivity extends AppCompatActivity implements View.OnClic
     protected void onDestroy() {
        unregisterReceiver(receciver);
         receciver=null;
+        super.onDestroy();
     }
 }

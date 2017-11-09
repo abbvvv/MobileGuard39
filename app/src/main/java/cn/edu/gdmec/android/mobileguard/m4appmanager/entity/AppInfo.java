@@ -15,6 +15,10 @@ public class AppInfo {
     public boolean isInRoom;
     public boolean isUserApp;
     public boolean isSelected=false;
+    public String version;
+    public String InstallTime;
+    public String signature;
+    public String permissions;
     public String getAppLocation(boolean isInRoom){
         if(isInRoom){
             return "手机内存";
