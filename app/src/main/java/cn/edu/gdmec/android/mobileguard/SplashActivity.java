@@ -1,5 +1,6 @@
 package cn.edu.gdmec.android.mobileguard;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         mVersion= MyUtils.getVersion(getApplicationContext());
         mTvVersion=(TextView)findViewById(R.id.tv_splash_version);
         mTvVersion.setText("版本号："+mVersion);
-        VersionUpdateUtils.DownloadCallback downloadCallback = new VersionUpdateUtils.DownloadCallback() {
+       /* VersionUpdateUtils.DownloadCallback downloadCallback = new VersionUpdateUtils.DownloadCallback() {
             @Override
             public void afterDownload(String filename) {
                 MyUtils.installApk(SplashActivity.this,filename);
@@ -33,6 +34,8 @@ public class SplashActivity extends AppCompatActivity {
                 versionUpdateUtils.getCloudVersion("http://android2017.duapp.com/updateinfo.html");
             }
 
-        }.start();
+        }.start();*/
+        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 }

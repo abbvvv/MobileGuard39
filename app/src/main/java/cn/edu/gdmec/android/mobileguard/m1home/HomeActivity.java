@@ -26,6 +26,7 @@ import cn.edu.gdmec.android.mobileguard.m3communicationguard.SecurityPhoneActivi
 import cn.edu.gdmec.android.mobileguard.m4appmanager.AppManagerActivity;
 import cn.edu.gdmec.android.mobileguard.m5virusscan.VirusScanActivity;
 import cn.edu.gdmec.android.mobileguard.m6cleancache.CacheClearListActivity;
+import cn.edu.gdmec.android.mobileguard.m8trafficmonitor.TrafficMonitoringActivity;
 
 /**
  * Created by student on 17/9/19.
@@ -70,6 +71,9 @@ public class HomeActivity extends AppCompatActivity{
                         break;
                     case 4:
                         startActivity(CacheClearListActivity.class);
+                        break;
+                    case 6:
+                        startActivity(TrafficMonitoringActivity.class);
                         break;
 
                 }
