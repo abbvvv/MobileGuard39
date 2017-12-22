@@ -5,13 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 
 import cn.edu.gdmec.android.mobileguard.App;
+import cn.edu.gdmec.android.mobileguard.m9advancedtools.service.AppLockService;
 
 public class BootCompleteReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
         ((App)(context.getApplicationContext())).correctSIM();
+        context.startService(new Intent(context, AppLockService.class));
     }
 }
