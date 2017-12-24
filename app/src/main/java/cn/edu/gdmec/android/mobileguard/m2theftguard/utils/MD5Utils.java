@@ -14,7 +14,7 @@ public class MD5Utils {
     public static String encode(String text){
         try {
             MessageDigest digest=MessageDigest.getInstance("md5");
-            byte[] result=digest.digest(text.getBytes());
+            byte[] result=digest.digest();
             StringBuilder sb=new StringBuilder();
             for(byte b:result){
                 int number=b&0xff;

@@ -228,7 +228,7 @@ public class VirusScanSpeedActivity extends AppCompatActivity implements View.On
         mScanAppTV = (TextView) findViewById(R.id.tv_scansapp);
         mCancleBtn = (Button) findViewById(R.id.btn_canclescan);
         mCancleBtn.setOnClickListener(this);
-        mScanListView = (ListView) findViewById(R.id.tv_scanapps);
+        mScanListView = (ListView) findViewById(R.id.lv_scanapps);
         adapter = new ScanVirusAdapter(mScanAppInfos,this);
         mScanListView.setAdapter(adapter);
         mScanningIcon = (ImageView) findViewById(R.id.imgv_scanningicon);
@@ -258,8 +258,8 @@ public class VirusScanSpeedActivity extends AppCompatActivity implements View.On
                     mCancleBtn.setBackgroundResource(R.drawable.restart_scan_btn);
                 }else if(isStop){
                     startAnim();
-                    cloudScanVirus();
-                    mCancleBtn.setBackgroundResource(R.drawable.cancel_scan_btn_selector);
+                    scanVirus();
+                    mCancleBtn.setBackgroundResource(R.drawable.scanning_icon);
                 }
                 break;
         }

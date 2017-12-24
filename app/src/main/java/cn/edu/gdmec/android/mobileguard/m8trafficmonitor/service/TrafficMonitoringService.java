@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.TrafficStats;
+import android.os.Binder;
 import android.os.IBinder;
 
 import java.text.SimpleDateFormat;
@@ -19,7 +20,19 @@ public class TrafficMonitoringService extends Service {
     private SharedPreferences mSp;
     private long usedFlow;
     boolean flag = true;
-
+    public class MyBinder extends Binder {
+        public TrafficMonitoringService getService(){
+            return TrafficMonitoringService.this;
+        }
+    }
+    private MyBinder binder = new MyBinder();
+    @Override
+    public IBinder onBind(Intent intent) {
+        return binder;
+    }
+    public long getUsedFlow(){
+        return usedFlow;
+    }
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,6 +40,7 @@ public class TrafficMonitoringService extends Service {
         mOldTxBytes = TrafficStats.getMobileTxBytes();
         dao = new TrafficDao(this);
         mSp = getSharedPreferences("config", MODE_PRIVATE);
+        usedFlow = mSp.getLong("usedflow", 0);
         mThread.start();
     }
     private Thread mThread = new Thread(){
@@ -88,11 +102,5 @@ public class TrafficMonitoringService extends Service {
         super.onDestroy();
     }
 
-    public TrafficMonitoringService() {
-    }
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
 }

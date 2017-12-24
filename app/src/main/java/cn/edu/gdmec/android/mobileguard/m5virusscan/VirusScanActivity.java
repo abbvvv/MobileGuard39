@@ -25,6 +25,7 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
     private TextView mLastTimeTV;
     private SharedPreferences mSP;
     private TextView mDbVersionTV;;
+    private String mVersion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +51,9 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
             if (msg.what == 0) {
                 AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
                 String dbVersion  = dao.getVirusDbVersion();
-                mDbVersionTV = (TextView) findViewById(R.id.tv_dbversion);
-                mDbVersionTV.setText("病毒数据库版本:" + dbVersion);
-                UpdateDb(dbVersion);
+                mDbVersionTV = (TextView) findViewById(R.id.tv_scan_version);
+                mDbVersionTV.setText("病毒数据库版本:" + mVersion);
+                UpdateDb(mVersion);
                 }
                 super.handleMessage(msg);
 
@@ -61,20 +62,18 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
     VersionUpdateUtils.DownloadCallback downloadCallback = new VersionUpdateUtils.DownloadCallback() {
         @Override
         public void afterDownload(String filename) {
-            copyDB("antivirus.db", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath());
+            copyDB("antivirus.db", Environment.getExternalStoragePublicDirectory("/download/").getPath());
         }
     };
 
     final private void UpdateDb(String localDbVersion){
         final VersionUpdateUtils versionUpdateUtils = new VersionUpdateUtils(localDbVersion,VirusScanActivity.this,downloadCallback,null);
         new Thread(){
-
             @Override
             public void run() {
                 versionUpdateUtils.getCloudVersion("http://android2017.duapp.com/virusupdateinfo.html");
             }
         }.start();
-
     }
 
 

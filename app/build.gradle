@@ -22,7 +22,7 @@ android {
     }
     defaultConfig {
         applicationId "cn.edu.gdmec.android.mobileguard"
-        minSdkVersion 15
+        minSdkVersion 18
         targetSdkVersion 26
         versionCode 1
         versionName "1.2"
@@ -48,4 +48,5 @@ dependencies {
     compile 'com.android.support:support-v4:26.+'
     compile 'com.android.support:recyclerview-v7:26.+'
     testCompile 'junit:junit:4.12'
+    androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 }

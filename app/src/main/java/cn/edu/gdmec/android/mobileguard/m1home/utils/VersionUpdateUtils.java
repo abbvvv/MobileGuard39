@@ -45,6 +45,7 @@ public class VersionUpdateUtils {
     private Activity context;
     private VersionEntity versionEntity;
     private Class<?> nextActivity;
+    private ProgressDialog mProgressDialog;
     private BroadcastReceiver broadcastReceiver;
     private DownloadCallback downloadCallback;
     private long downloadId;
@@ -61,9 +62,11 @@ public class VersionUpdateUtils {
          switch (msg.what) {
              case MESSAGE_IO_ERROR:
                  Toast.makeText(context, "IO错误", Toast.LENGTH_LONG).show();
+                 enterHome();
                  break;
              case MESSAGE_JSON_ERROR:
                  Toast.makeText(context, "JSON解析错误", Toast.LENGTH_LONG).show();
+                 enterHome();
                  break;
              case MESSAGE_SHOW_DIALOG:
                  showUpdateDialog(versionEntity);
@@ -101,12 +104,16 @@ public class VersionUpdateUtils {
             if (execute.getStatusLine().getStatusCode()==200){
                 HttpEntity httpEntity=execute.getEntity();
                 String result= EntityUtils.toString(httpEntity,"utf-8");
+                System.out.println(result);
                 JSONObject jsonObject=new JSONObject(result);
                 versionEntity=new VersionEntity();
-                versionEntity.versionCode=jsonObject.getString("code");
-                versionEntity.description=jsonObject.getString("des");
-                versionEntity.apkurl=jsonObject.getString("apkurl");
-                if(!mVersion.equals(versionEntity.versionCode)){
+                String code = jsonObject.getString("code");
+                versionEntity.versioncode = code;
+                String des = jsonObject.getString("des");
+                versionEntity.description = des;
+                String apkurl = jsonObject.getString("apkurl");
+                versionEntity.apkurl = apkurl;
+                if(!mVersion.equals(versionEntity.versioncode)){
                     //System.out.println(versionEntity.description);
                    //DownloadUtils downloadUtils=new DownloadUtils();
                     //downloadUtils.downloadApk(versionEntity.apkurl,"mobileguard.apk",context);
@@ -125,7 +132,7 @@ public class VersionUpdateUtils {
     }
     private void showUpdateDialog(final VersionEntity versionEntity){
         AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        builder.setTitle("检查到有新版本"+versionEntity.versionCode);
+        builder.setTitle("检查到有新版本"+versionEntity.versioncode);
         builder.setMessage(versionEntity.description);
         builder.setCancelable(false);
         builder.setIcon(R.mipmap.ic_launcher_round);
@@ -133,6 +140,7 @@ public class VersionUpdateUtils {
             @Override
             public void onClick(DialogInterface dialogInterface,int i){
                 downloadNewApk(versionEntity.apkurl);
+                enterHome();
             }
         });
         builder.setNegativeButton("暂不升级",new DialogInterface.OnClickListener(){

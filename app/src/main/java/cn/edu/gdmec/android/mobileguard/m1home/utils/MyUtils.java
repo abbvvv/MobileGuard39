@@ -31,7 +31,7 @@ public class MyUtils {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setDataAndType(Uri.fromFile(
-                new File(Environment.getExternalStoragePublicDirectory("/download/").getPath()+"/"+apkFile)),"application/vnd.android.package-archive");
+                new File(Environment.getExternalStoragePublicDirectory("/download/").getPath()+"/"+apkFile)), "application/vnd.android.package-archive");
         activity.startActivityForResult(intent,0);
     }
 }
