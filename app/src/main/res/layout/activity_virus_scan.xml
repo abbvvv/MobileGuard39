@@ -82,7 +82,7 @@
             android:layout_marginLeft="10dp"/>
 
         <TextView
-            android:id="@+id/tv_cloudscan"
+            android:id="@+id/tv_dbversion"
             style="@style/textview16sp"
             android:layout_toRightOf="@+id/imgv_cloudscan"
             android:layout_marginLeft="15dp"

@@ -25,7 +25,6 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
     private TextView mLastTimeTV;
     private SharedPreferences mSP;
     private TextView mDbVersionTV;;
-    private String mVersion;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,31 +37,25 @@ public class VirusScanActivity extends AppCompatActivity implements View.OnClick
     protected void onResume() {
         String string=mSP.getString("lastVirusScan","您还没有查杀病毒！");
         mLastTimeTV.setText(string);
-        /*AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
-        String virusVersion = dao.getVirusVersion();
-        mVersionTV = (TextView) findViewById(R.id.tv_version);
-        mVersionTV.setText("病毒数据库版本:"+virusVersion);
-        updateVesion(virusVersion);*/
         super.onResume();
     }
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 0) {
+            if (msg.what == 0){
                 AntiVirusDao dao = new AntiVirusDao(VirusScanActivity.this);
-                String dbVersion  = dao.getVirusDbVersion();
-                mDbVersionTV = (TextView) findViewById(R.id.tv_scan_version);
-                mDbVersionTV.setText("病毒数据库版本:" + mVersion);
-                UpdateDb(mVersion);
-                }
-                super.handleMessage(msg);
-
+                String dbVersion = dao.getVirusDbVersion();
+                mDbVersionTV = (TextView) findViewById(R.id.tv_dbversion);
+                mDbVersionTV.setText("病毒数据库版本:"+dbVersion);
+                UpdateDb(dbVersion);
+            }
+            super.handleMessage(msg);
         }
     };
     VersionUpdateUtils.DownloadCallback downloadCallback = new VersionUpdateUtils.DownloadCallback() {
         @Override
         public void afterDownload(String filename) {
-            copyDB("antivirus.db", Environment.getExternalStoragePublicDirectory("/download/").getPath());
+            copyDB("antivirus.db", Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath());
         }
     };
 

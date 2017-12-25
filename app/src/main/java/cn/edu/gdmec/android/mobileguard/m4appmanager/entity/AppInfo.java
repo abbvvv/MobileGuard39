@@ -14,17 +14,19 @@ public class AppInfo {
     public long appSize;
     public boolean isInRoom;
     public boolean isUserApp;
-    public boolean isSelected=false;
-    public String version;
-    public String InstallTime;
+    public boolean isSelected = false;
+    public String versionName;
+    public long firstInstallTime;
     public String signature;
-    public String permissions;
+    public String requestedPermissions;
+    public String activities;
     public String getAppLocation(boolean isInRoom){
         if(isInRoom){
             return "手机内存";
         }else{
-            return "外部存储";
+            return "外部内存";
         }
     }
+    //新加
     public boolean isLock;
 }

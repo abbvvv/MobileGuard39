@@ -24,15 +24,16 @@ import cn.edu.gdmec.android.mobileguard.m4appmanager.utils.EngineUtils;
  * Created by Administrator on 2017/11/7.
  */
 
-public class AppManagerAdapter extends BaseAdapter{
+public class AppManagerAdapter extends BaseAdapter {
     private List<AppInfo> UserAppInfos;
     private List<AppInfo> SystemAppInfos;
     private Context context;
+
     public AppManagerAdapter(List<AppInfo> userAppInfos,List<AppInfo> systemAppInfos,Context context){
         super();
-        UserAppInfos=userAppInfos;
-        SystemAppInfos=systemAppInfos;
-        this.context=context;
+        UserAppInfos = userAppInfos;
+        SystemAppInfos = systemAppInfos;
+        this.context = context;
     }
     @Override
     public int getCount() {
@@ -41,17 +42,17 @@ public class AppManagerAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int i) {
-        if(i==0){
+        if(i == 0) {
             return null;
-        }else if(i==(UserAppInfos.size() + 1)){
+        }else if(i == (UserAppInfos.size() + 1)){
             return null;
         }
         AppInfo appInfo;
-        if(i<(UserAppInfos.size() + 1)){
-            appInfo=UserAppInfos.get(i-1);
+        if(i < (UserAppInfos.size() +1)){
+            appInfo = UserAppInfos.get(i-1);
         }else{
-            int location=i-UserAppInfos.size() - 2;
-            appInfo=SystemAppInfos.get(location);
+            int location = i - UserAppInfos.size() - 2;
+            appInfo = SystemAppInfos.get(location);
         }
         return appInfo;
     }
@@ -63,40 +64,41 @@ public class AppManagerAdapter extends BaseAdapter{
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        if(i==0){
-            TextView tv=getTextView();
-            tv.setText("用户程序："+UserAppInfos.size()+"个");
+        if(i == 0){
+            TextView tv = getTextView();
+            tv.setText("用户程序：" + UserAppInfos.size() + "个");
             return tv;
-        }else if(i==(UserAppInfos.size()+1)){
-            TextView tv=getTextView();
-            tv.setText("系统程序："+SystemAppInfos.size()+"个");
+        }else if(i == (UserAppInfos.size() +1)){
+            TextView tv = getTextView();
+            tv.setText("系统程序：" + SystemAppInfos.size() + "个");
             return tv;
         }
         AppInfo appInfo;
-        if(i<(UserAppInfos.size()+1)){
-            appInfo=UserAppInfos.get(i-1);
+        if(i < (UserAppInfos.size() + 1)){
+            appInfo = UserAppInfos.get(i-1);
         }else{
-            appInfo=SystemAppInfos.get(i-UserAppInfos.size()-2);
+            appInfo = SystemAppInfos.get(i - UserAppInfos.size() - 2);
         }
-        ViewHolder viewHolder=null;
-        if(view!=null&&view instanceof LinearLayout){
-            viewHolder=(ViewHolder)view.getTag();
+        ViewHolder viewHolder = null;
+        if(view != null & view instanceof LinearLayout){
+            viewHolder = (ViewHolder) view.getTag();
         }else{
-            viewHolder=new ViewHolder();
-            view=View.inflate(context, R.layout.item_appmanager_list,null);
-            viewHolder.mAppIconImgv=(ImageView)view.findViewById(R.id.imgv_appicon);
-            viewHolder.mAppLocationTV=(TextView)view.findViewById(R.id.tv_appisroom);
-            viewHolder.mAppSizeTV=(TextView)view.findViewById(R.id.tv_appsize);
-            viewHolder.mAppNameTV=(TextView)view.findViewById(R.id.tv_appname);
-            viewHolder.mLuanchAppTV=(TextView)view.findViewById(R.id.tv_launch_app);
-            viewHolder.mSettingAppTV=(TextView)view.findViewById(R.id.tv_setting_app);
-            viewHolder.mShareAppTV=(TextView)view.findViewById(R.id.tv_share_app);
-            viewHolder.mUninstallTV=(TextView)view.findViewById(R.id.tv_uninstall_app);
-            viewHolder.mAppOptionLL=(LinearLayout)view.findViewById(R.id.ll_option_app);
+            viewHolder = new ViewHolder();
+            view = View.inflate(context, R.layout.item_appmanager_list,null);
+            viewHolder.mAppIconImgv = (ImageView) view.findViewById(R.id.imgv_appicon);
+            viewHolder.mAppLocationTV = (TextView) view.findViewById(R.id.tv_appisroom);
+            viewHolder.mAppSizeTV = (TextView) view.findViewById(R.id.tv_appsize);
+            viewHolder.mAppNameTV = (TextView) view.findViewById(R.id.tv_appname);
+            viewHolder.mLuanchAppTV = (TextView) view.findViewById(R.id.tv_launch_app);
+            viewHolder.mSettingAppTV = (TextView) view.findViewById(R.id.tv_setting_app);
+            viewHolder.mShareAppTV = (TextView) view.findViewById(R.id.tv_share_app);
+            viewHolder.mUninstallTV = (TextView) view.findViewById(R.id.tv_uninstall_app);
+            viewHolder.mAppOptionLL = (LinearLayout) view.findViewById(R.id.ll_option_app);
             viewHolder.mAboutBTN = (TextView) view.findViewById(R.id.tv_aboutapp);
+            viewHolder.mActivityTV = (TextView) view.findViewById(R.id.tv_activityapp);
             view.setTag(viewHolder);
         }
-        if(appInfo!=null){
+        if(appInfo != null){
             viewHolder.mAppLocationTV.setText(appInfo.getAppLocation(appInfo.isInRoom));
             viewHolder.mAppIconImgv.setImageDrawable(appInfo.icon);
             viewHolder.mAppSizeTV.setText(Formatter.formatFileSize(context,appInfo.appSize));
@@ -107,22 +109,20 @@ public class AppManagerAdapter extends BaseAdapter{
                 viewHolder.mAppOptionLL.setVisibility(View.GONE);
             }
         }
-        MyClickListener listener=new MyClickListener(appInfo);
+        MyClickListener listener = new MyClickListener(appInfo);
         viewHolder.mLuanchAppTV.setOnClickListener(listener);
         viewHolder.mSettingAppTV.setOnClickListener(listener);
         viewHolder.mShareAppTV.setOnClickListener(listener);
         viewHolder.mUninstallTV.setOnClickListener(listener);
         viewHolder.mAboutBTN.setOnClickListener(listener);
+        viewHolder.mActivityTV.setOnClickListener(listener);
+
         return view;
     }
-
-    private TextView getTextView() {
-        TextView tv=new TextView(context);
+    private TextView getTextView(){
+        TextView tv = new TextView(context);
         tv.setBackgroundColor(ContextCompat.getColor(context,R.color.graye5));
-        tv.setPadding(DensityUtil.dip2px(context,5),
-                DensityUtil.dip2px(context,5),
-                DensityUtil.dip2px(context,5),
-                DensityUtil.dip2px(context,5));
+        tv.setPadding(DensityUtil.dip2px(context,5),DensityUtil.dip2px(context,5),DensityUtil.dip2px(context,5),DensityUtil.dip2px(context,5));
         tv.setTextColor(ContextCompat.getColor(context,R.color.black));
         return tv;
     }
@@ -137,12 +137,13 @@ public class AppManagerAdapter extends BaseAdapter{
         TextView mAppNameTV;
         LinearLayout mAppOptionLL;
         TextView mAboutBTN;
+        TextView mActivityTV;
     }
     class MyClickListener implements View.OnClickListener{
         private AppInfo appInfo;
-        public MyClickListener(AppInfo appInfo) {
+        public MyClickListener(AppInfo appInfo){
             super();
-            this.appInfo=appInfo;
+            this.appInfo = appInfo;
         }
 
         @Override
@@ -165,9 +166,11 @@ public class AppManagerAdapter extends BaseAdapter{
                     EngineUtils.uninstallApplication(context,appInfo);
                     break;
                 case R.id.tv_aboutapp:
-                    EngineUtils.AboutSign(context,appInfo);
+                    EngineUtils.showApplicationInfo(context,appInfo);
                     break;
-
+                case R.id.tv_activityapp:
+                    EngineUtils.showApplicationActivities(context,appInfo);
+                    break;
             }
         }
     }

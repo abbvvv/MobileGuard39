@@ -16,14 +16,15 @@ import cn.edu.gdmec.android.mobileguard.R;
  */
 
 
-public class AdvancedToolsView extends RelativeLayout{
+public class AdvancedToolsView extends RelativeLayout {
     private TextView mDescriptionTV;
     private String desc = "";
     private Drawable drawable;
     private ImageView mLeftImgv;
-    public AdvancedToolsView(Context context) {
+    public AdvancedToolsView(Context context){
         super(context);
         init(context);
+
     }
     public AdvancedToolsView(Context context,AttributeSet attrs,int defStyle){
         super(context,attrs,defStyle);
@@ -32,7 +33,7 @@ public class AdvancedToolsView extends RelativeLayout{
 
     public AdvancedToolsView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.AdvancedToolsView);
+        TypedArray mTypedArray = context.obtainStyledAttributes(attrs,R.styleable.AdvancedToolsView);
         desc = mTypedArray.getString(R.styleable.AdvancedToolsView_desc);
         drawable = mTypedArray.getDrawable(R.styleable.AdvancedToolsView_android_src);
         mTypedArray.recycle();

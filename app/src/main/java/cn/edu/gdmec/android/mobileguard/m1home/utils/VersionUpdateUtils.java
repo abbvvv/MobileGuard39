@@ -87,67 +87,55 @@ public class VersionUpdateUtils {
 
 
     //private ProgressDialog mProgressDialog;
-    public VersionUpdateUtils(String mVersion,Activity context,DownloadCallback downloadCallback,Class<?> nextActivity) {
+    public VersionUpdateUtils(String mVersion, Activity context,DownloadCallback downloadCallback,Class<?> nextActivity) {
         this.mVersion = mVersion;
-        this.context=context;
+        this.context = context;
         this.nextActivity = nextActivity;
         this.downloadCallback = downloadCallback;
     }
     public void getCloudVersion(String url){
-
         try {
-            HttpClient httpclient=new DefaultHttpClient();
-            HttpConnectionParams.setConnectionTimeout(httpclient.getParams(),5000);
-            HttpConnectionParams.setSoTimeout(httpclient.getParams(),5000);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpConnectionParams.setConnectionTimeout(httpClient.getParams(), 5000);
+            HttpConnectionParams.setSoTimeout(httpClient.getParams(), 5000);
             HttpGet httpGet = new HttpGet(url);
-            HttpResponse execute= httpclient.execute(httpGet);
-            if (execute.getStatusLine().getStatusCode()==200){
-                HttpEntity httpEntity=execute.getEntity();
-                String result= EntityUtils.toString(httpEntity,"utf-8");
-                System.out.println(result);
-                JSONObject jsonObject=new JSONObject(result);
-                versionEntity=new VersionEntity();
-                String code = jsonObject.getString("code");
-                versionEntity.versioncode = code;
-                String des = jsonObject.getString("des");
-                versionEntity.description = des;
-                String apkurl = jsonObject.getString("apkurl");
-                versionEntity.apkurl = apkurl;
-                if(!mVersion.equals(versionEntity.versioncode)){
-                    //System.out.println(versionEntity.description);
-                   //DownloadUtils downloadUtils=new DownloadUtils();
-                    //downloadUtils.downloadApk(versionEntity.apkurl,"mobileguard.apk",context);
+            HttpResponse execute = httpClient.execute(httpGet);
+            if (execute.getStatusLine().getStatusCode() == 200) {
+                HttpEntity httpEntity = execute.getEntity();
+                String result = EntityUtils.toString(httpEntity, "utf-8");
+                JSONObject jsonObject = new JSONObject(result);
+                versionEntity = new VersionEntity();
+                versionEntity.versionCode = jsonObject.getString("code");
+                versionEntity.description = jsonObject.getString("des");
+                versionEntity.apkurl = jsonObject.getString("apkurl");
+                if (!mVersion.equals(versionEntity.versionCode)) {
                     handler.sendEmptyMessage(MESSAGE_SHOW_DIALOG);
                 }
             }
-        } catch (IOException e) {
+        }catch (IOException e){
             handler.sendEmptyMessage(MESSAGE_IO_ERROR);
-            e.printStackTrace();
-        } catch (JSONException e) {
+        }catch (JSONException e){
             handler.sendEmptyMessage(MESSAGE_JSON_ERROR);
-            e.printStackTrace();
         }
-
-
     }
     private void showUpdateDialog(final VersionEntity versionEntity){
-        AlertDialog.Builder builder=new AlertDialog.Builder(context);
-        builder.setTitle("检查到有新版本"+versionEntity.versioncode);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("检查到新版本："+versionEntity.versionCode);
         builder.setMessage(versionEntity.description);
         builder.setCancelable(false);
         builder.setIcon(R.mipmap.ic_launcher_round);
-        builder.setPositiveButton("立刻升级",new DialogInterface.OnClickListener(){
+        builder.setPositiveButton("立刻升级", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface,int i){
+            public void onClick(DialogInterface dialogInterface, int i) {
                 downloadNewApk(versionEntity.apkurl);
-                enterHome();
+                //enterHome();
             }
         });
-        builder.setNegativeButton("暂不升级",new DialogInterface.OnClickListener(){
+        builder.setNegativeButton("暂不升级", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface,int i){
+            public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
-               enterHome();
+                enterHome();
             }
         });
         builder.show();
@@ -156,8 +144,7 @@ public class VersionUpdateUtils {
         handler.sendEmptyMessageDelayed(MESSAGE_ENTERHOME,2000);
     }
     private void downloadNewApk(String apkurl){
-        DownloadUtils downloadUtils=new DownloadUtils();
-        //downloadUtils.downloadApk(apkurl,"mobileguard.apk",context);
+        DownloadUtils downloadUtils = new DownloadUtils();
         String filename = "downloadfile";
         String suffixes="avi|mpeg|3gp|mp3|mp4|wav|jpeg|gif|jpg|png|apk|exe|pdf|rar|zip|docx|doc|apk|db";
         Pattern pat= Pattern.compile("[\\w]+[\\.]("+suffixes+")");
